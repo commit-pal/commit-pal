@@ -1,6 +1,6 @@
-.PHONY: lint format test install
+.PHONY: lint
 
 lint:
-	cd cmp && poetry run black .
-	cd cmp && poetry run isort .
-	cd cmp && poetry run autoflake --in-place --remove-all-unused-imports --recursive .
+	cd cmpal && poetry run black .
+	cd cmpal && poetry run isort .
+	cd cmpal && poetry run autoflake --in-place --remove-all-unused-imports --recursive .

@@ -1,6 +1,6 @@
 # commit-pal
 
-An AI assistant that helps you write commit messages at the speed of light
+A CLI AI assistant that helps you write commit messages at the speed of light
 
 ## Install Poetry
 
@@ -30,6 +30,14 @@ cp .env.example .env
 
 ```bash
 make lint
+```
+
+## Quick Start to Test CLI App
+
+```bash
+pip uninstall cmpal -y # Uninstall old version of cmpal
+pip install -e . -v # Install new version of cmpal
+cmpal # Run cmpal
 ```
 
 ## Debugging notes
