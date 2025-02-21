@@ -1,0 +1,31 @@
+{
+  "editor.rulers": [100],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll": "explicit"
+    }
+  },
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "black-formatter.args": ["--line-length=100"],
+  "isort.args": [
+    "--line-length=100",
+    "--wrap-length=100",
+    "--multi-line=3",
+    "--trailing-comma",
+    "--profile=black"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "pylint.importStrategy": "fromEnvironment",
+  "pylint.args": ["--rcfile=.pylintrc"],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": "error",
+    "reportTypeVarUsage": "error",
+    "reportUnknownMemberType": "none"
+  }
+}

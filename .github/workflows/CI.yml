@@ -1,0 +1,40 @@
+name: CI checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci-checks:
+    name: Continuous Integration Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.12.1
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.1"
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root
+
+      - name: Run isort
+        run: |
+          poetry run isort --check-only --diff .
+
+      - name: Run black
+        run: |
+          poetry run black --check --diff .
+
+      - name: Run autoflake
+        run: |
+          poetry run autoflake --remove-all-unused-imports --in-place --recursive --check --exclude=__init__.py --ignore-pass-after-docstring .
+
