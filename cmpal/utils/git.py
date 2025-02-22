@@ -48,7 +48,7 @@ def get_diff(file_path: Optional[str] = None) -> str:
         cmd = ["git", "diff", "--cached", "--color=never"]
         if file_path:
             cmd.append(file_path)
-        
+
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         if not result.stdout:
             return ""
@@ -56,10 +56,10 @@ def get_diff(file_path: Optional[str] = None) -> str:
         # For single file diff
         if file_path:
             return _process_diff_content(file_path, result.stdout)
-            
+
         # For multiple files diff
         return _process_multiple_diffs(result.stdout)
-        
+
     except subprocess.CalledProcessError:
         return ""
 
@@ -73,7 +73,7 @@ def _process_diff_content(file_path: str, diff_content: str) -> str:
         # "package-lock.json": clean_package_lock_diff,
         # "yarn.lock": clean_yarn_lock_diff,
     }
-    
+
     file_name = file_path.split("/")[-1]
     processor = processors.get(file_name)
     return processor(diff_content) if processor else diff_content
@@ -83,11 +83,11 @@ def _process_multiple_diffs(diff_content: str) -> str:
     """Process multiple file diffs."""
     if not diff_content:
         return ""
-        
+
     diff_sections = []
     current_file = ""
     current_section = []
-    
+
     for line in diff_content.split("\n"):
         if line.startswith("diff --git"):
             # Process previous section if exists
@@ -95,22 +95,23 @@ def _process_multiple_diffs(diff_content: str) -> str:
                 processed = _process_diff_content(current_file, "\n".join(current_section))
                 if processed:
                     diff_sections.append(processed)
-            
+
             # Start new section
             current_section = [line]
             current_file = line.split()[-1]
         else:
             current_section.append(line)
-    
+
     # Process last section
     if current_section:
         processed = _process_diff_content(current_file, "\n".join(current_section))
         if processed:
             diff_sections.append(processed)
-    
+
     return "\n\n".join(diff_sections)
 
 
+# For testing
 if __name__ == "__main__":
     engine = OllamaEngine()
     diff = get_diff()
