@@ -67,7 +67,7 @@ class CommitStyleConfigs(BaseModel):
         default=72,
         description="Maximum length of the subject line. Defaults to 72 characters.",
         ge=50,
-        le=100,  # Enforce reasonable limits
+        le=100,
     )
 
     class Config:
