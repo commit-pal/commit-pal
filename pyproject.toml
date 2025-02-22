@@ -1,6 +1,6 @@
 [project]
 name = "cmpal"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = [
     {name = "jinyang628",email = "chenjinyang4192@gmail.com"},

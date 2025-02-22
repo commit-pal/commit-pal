@@ -40,6 +40,13 @@ pip install -e . -v # Install new version of cmpal
 cmpal # Run cmpal
 ```
 
+## Publish to PyPI
+
+```bash
+# Bump the semantic version in pyproject.toml before running this command
+make publish
+```
+
 ## Debugging notes
 
 ### Configure VSCode Python Interpreter to use Poetry's virtual environment
