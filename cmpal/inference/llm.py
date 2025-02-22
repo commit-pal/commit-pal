@@ -8,11 +8,10 @@ class OllamaEngine:
     def __init__(
         self,
         config: CommitStyleConfigs,
-        host="http://localhost:11434",
-        model="llama3.2",
+        host: str = "http://localhost:11434",
+        model: str = "llama3.2",
         headers=None,
     ):
-        # TODO: Add default config to the constructor
         self._client = Client(host=host, headers=headers or {"x-some-header": "some-value"})
         self._model = model
         self._config = config
