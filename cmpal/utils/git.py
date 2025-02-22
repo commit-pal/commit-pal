@@ -2,7 +2,7 @@ import subprocess
 from typing import List, Optional
 
 from cmpal.inference.llm import OllamaEngine
-from cmpal.utils.format import format_poetry_lock_diff
+from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff
 
 
 def get_staged_files() -> List[str]:
@@ -69,6 +69,7 @@ def _process_diff_content(file_path: str, diff_content: str) -> str:
     # Add custom processors for different file types here
     processors = {
         "poetry.lock": format_poetry_lock_diff,
+        "yarn.lock": format_yarn_lock_diff,
         # Add more file type processors here:
         # "package-lock.json": clean_package_lock_diff,
         # "yarn.lock": clean_yarn_lock_diff,
