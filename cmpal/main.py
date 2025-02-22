@@ -1,15 +1,16 @@
+from cmpal.models.config import CommitStyleConfigs
 from cmpal.scripts.config import load_config, save_config
 from cmpal.scripts.onboard import main as onboard
 
 
 def main():
-    # FOR TESTING
-    onboard()
-
-    if not (config := load_config()):
-        onboard()
-        save_config({"test": "test"})
-        config = load_config()
+    if saved_config := load_config():
+        configs: CommitStyleConfigs = CommitStyleConfigs.model_validate(saved_config)
+        print(f"Config loaded successfully!\n\n{configs.pretty_print()}")
+    else:
+        configs: CommitStyleConfigs = onboard()
+        save_config(configs.model_dump())
+        print("Config saved successfully!")
 
 
 if __name__ == "__main__":

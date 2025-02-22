@@ -40,7 +40,7 @@ class FooterFormat(StrEnum):
     KEY_VALUE_EQUALS = "key_value_equals"  # "KEY=VALUE"
 
 
-class ConventionalCommitStyle(BaseModel):
+class CommitStyleConfigs(BaseModel):
     """Stylistic preferences for conventional commits."""
 
     capitalization: CapitalizationStyle = Field(
@@ -72,3 +72,6 @@ class ConventionalCommitStyle(BaseModel):
 
     class Config:
         use_enum_values = True
+
+    def pretty_print(self) -> str:
+        return self.model_dump_json(indent=2)
