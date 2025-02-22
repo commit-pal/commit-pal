@@ -36,8 +36,9 @@ class OllamaEngine:
         """
         Example usage:
         engine = OllamaEngine()
-        for chunk in engine.stream(diff='Hello, how are you?'):
-            print(chunk, end='', flush=True)
+        diff = get_diff()
+        for chunk in engine.stream(diff):
+            print(chunk, end="", flush=True)
         """
         messages = self._create_messages(diff)
         response = self._client.chat(model=self._model, messages=messages, stream=True)
