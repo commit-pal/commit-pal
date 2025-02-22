@@ -22,6 +22,7 @@ setuptools = "^75.8.0"
 ollama = "^0.4.7"
 pydantic = "^2.10.6"
 simple-term-menu = "^1.6.6"
+colorama = "^0.4.6"
 [tool.black]
 line-length = 100
 
@@ -33,7 +34,7 @@ profile = "black"
 include_trailing_comma = true
 
 [tool.poetry.scripts]
-cmpal = "cmpal.main:main" 
+"cmpal" = "cmpal.main:main" 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
