@@ -11,12 +11,15 @@ def main():
         print_error_message("Too many arguments provided.")
         return 1
     elif len(sys.argv) == 1:
-        print_available_commands()
+        # TODO: Invoke inference if config is found, else invoke setup
         return 0
 
     match sys.argv[1]:
         case "--setup":
             return setup()
+        case "--help":
+            print_available_commands()
+            return 0
         case _:
             print_error_message("Invalid argument provided.")
             print_available_commands()
