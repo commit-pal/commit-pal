@@ -1,13 +1,14 @@
 [project]
 name = "cmpal"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = [
     {name = "jinyang628",email = "chenjinyang4192@gmail.com"},
     {name = "suveenE",email = "suveen.ellawela@u.nus.edu"}
 ]
 readme = "README.md"
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.12, <4.0"
+
 
 
 [tool.poetry.group.dev.dependencies]
@@ -19,6 +20,8 @@ autoflake = "^2.3.1"
 [tool.poetry.dependencies]
 setuptools = "^75.8.0"
 ollama = "^0.4.7"
+pydantic = "^2.10.6"
+simple-term-menu = "^1.6.6"
 [tool.black]
 line-length = 100
 
