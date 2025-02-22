@@ -1,8 +1,6 @@
 import subprocess
 from typing import List, Optional
 
-from cmpal.inference.llm import OllamaEngine
-
 
 def get_staged_files() -> List[str]:
     try:
@@ -53,10 +51,3 @@ def get_diff(file_path: Optional[str] = None) -> str:
         return result.stdout
     except subprocess.CalledProcessError:
         return ""
-
-
-if __name__ == "__main__":
-    engine = OllamaEngine()
-    diff = get_diff()
-    for chunk in engine.stream(diff):
-        print(chunk, end="", flush=True)
