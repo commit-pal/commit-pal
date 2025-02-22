@@ -26,6 +26,14 @@ eval "$(poetry env activate)"
 cp .env.example .env
 ```
 
+## Run LLM Locally
+
+- [Ollama](https://ollama.com/download) should be installed and running
+- Pull a model to use with the library: `ollama pull <model>` e.g. `ollama pull llama3.2`
+  - See [Ollama.com](https://ollama.com/search) for more information on the models available.
+
+By default, Ollama will run on `localhost:11434`.
+
 ## Style Enforcement
 
 ```bash
