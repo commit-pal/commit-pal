@@ -10,7 +10,7 @@ def main():
     else:
         configs: CommitStyleConfigs = onboard()
         save_config(configs.model_dump())
-        print("Config saved successfully!")
+        print(f"Config saved successfully!\n\n{configs.pretty_print()}")
 
 
 if __name__ == "__main__":
