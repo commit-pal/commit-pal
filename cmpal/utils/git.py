@@ -2,6 +2,7 @@ import subprocess
 from typing import List, Optional
 
 from cmpal.inference.llm import OllamaEngine
+from cmpal.models.config import CommitStyleConfigs
 from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff
 
 
@@ -114,7 +115,7 @@ def _process_multiple_diffs(diff_content: str) -> str:
 
 # For testing
 if __name__ == "__main__":
-    engine = OllamaEngine()
+    engine = OllamaEngine(config=CommitStyleConfigs())
     diff = get_diff()
     print(diff)
     for chunk in engine.stream(diff):
