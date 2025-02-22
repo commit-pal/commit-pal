@@ -11,6 +11,7 @@ from cmpal.models.config import (
     PunctuationStyle,
     ScopeFormat,
 )
+from cmpal.scripts.config import save_config
 
 T = TypeVar("T")
 
@@ -28,7 +29,7 @@ def _clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def create_selector(options: list[tuple[str, T]], prompt: str, default_index: int = 0) -> T:
+def _create_selector(options: list[tuple[str, T]], prompt: str, default_index: int = 0) -> T:
     _clear_screen()
     print(prompt)
 
@@ -44,9 +45,9 @@ def create_selector(options: list[tuple[str, T]], prompt: str, default_index: in
     return options[selected_index][1]
 
 
-def main() -> CommitStyleConfigs:
+def _onboard() -> CommitStyleConfigs:
     print("Welcome to commit-pal! Let's sort out some stylistic preferences.")
-    capitalization = create_selector(
+    capitalization = _create_selector(
         options=[
             ("lowercase (default)", CapitalizationStyle.LOWERCASE),
             ("capitalized", CapitalizationStyle.CAPITALIZED),
@@ -59,7 +60,7 @@ def main() -> CommitStyleConfigs:
             },
         ),
     )
-    punctuation = create_selector(
+    punctuation = _create_selector(
         options=[
             ("without punctuation (default)", PunctuationStyle.WITHOUT_PERIOD),
             ("with punctuation", PunctuationStyle.WITH_PERIOD),
@@ -72,7 +73,7 @@ def main() -> CommitStyleConfigs:
             },
         ),
     )
-    scope_format = create_selector(
+    scope_format = _create_selector(
         options=[
             ("parentheses (default)", ScopeFormat.PARENTHESES),
             ("brackets", ScopeFormat.BRACKETS),
@@ -87,7 +88,7 @@ def main() -> CommitStyleConfigs:
             },
         ),
     )
-    breaking_change_indicator = create_selector(
+    breaking_change_indicator = _create_selector(
         options=[
             ("exclamation mark (default)", BreakingChangeIndicator.EXCLAMATION_MARK),
             ("footer only", BreakingChangeIndicator.FOOTER_ONLY),
@@ -100,7 +101,7 @@ def main() -> CommitStyleConfigs:
             },
         ),
     )
-    footer_format = create_selector(
+    footer_format = _create_selector(
         options=[
             ("KEY: VALUE (default)", FooterFormat.KEY_VALUE_COLON),
             ("KEY=VALUE", FooterFormat.KEY_VALUE_EQUALS),
@@ -113,7 +114,7 @@ def main() -> CommitStyleConfigs:
             },
         ),
     )
-    max_subject_length = create_selector(
+    max_subject_length = _create_selector(
         options=[
             ("72 characters (default)", 72),
             ("50 characters", 50),
@@ -129,3 +130,14 @@ def main() -> CommitStyleConfigs:
         footer_format=footer_format,
         max_subject_length=max_subject_length,
     )
+
+
+def setup():
+    try:
+        configs: CommitStyleConfigs = _onboard()
+        save_config(configs.model_dump())
+        print(f"Config saved successfully!\n\n{configs.pretty_print()}")
+        return 0
+    except KeyboardInterrupt:
+        print("\nSetup cancelled. You can run setup again using 'cmpal-setup'")
+        return 1

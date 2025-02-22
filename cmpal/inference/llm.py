@@ -1,14 +1,17 @@
 from ollama import Client
 
-from cmpal.inference.prompts import (
-    GIT_COMMIT_MESSAGE_SYSTEM_PROMPT,
-    GIT_COMMIT_MESSAGE_USER_PROMPT,
-)
+from cmpal.inference.prompts import GIT_COMMIT_MESSAGE_SYSTEM_PROMPT, GIT_COMMIT_MESSAGE_USER_PROMPT
+from cmpal.models.config import CommitStyleConfigs
 
 
 class OllamaEngine:
-    def __init__(self, host="http://localhost:11434", model="llama3.2", config=None, headers=None):
-        # TODO: Add default config to the constructor
+    def __init__(
+        self,
+        config: CommitStyleConfigs,
+        host: str = "http://localhost:11434",
+        model: str = "llama3.2",
+        headers=None,
+    ):
         self._client = Client(host=host, headers=headers or {"x-some-header": "some-value"})
         self._model = model
         self._config = config
@@ -17,13 +20,13 @@ class OllamaEngine:
         return [
             {
                 "role": "system",
-                "content": GIT_COMMIT_MESSAGE_SYSTEM_PROMPT,
+                "content": GIT_COMMIT_MESSAGE_SYSTEM_PROMPT.format(
+                    style_config=self._config.pretty_print()
+                ),
             },
             {
                 "role": "user",
-                "content": GIT_COMMIT_MESSAGE_USER_PROMPT.format(
-                    diff=diff, style_config=self._config
-                ),
+                "content": GIT_COMMIT_MESSAGE_USER_PROMPT.format(diff=diff),
             },
         ]
 

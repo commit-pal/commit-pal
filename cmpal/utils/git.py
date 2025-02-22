@@ -2,7 +2,8 @@ import subprocess
 from typing import List, Optional
 
 from cmpal.inference.llm import OllamaEngine
-from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff
+from cmpal.models.config import CommitStyleConfigs
+from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff, print_error_message
 
 
 def get_staged_files() -> List[str]:
@@ -112,10 +113,19 @@ def _process_multiple_diffs(diff_content: str) -> str:
     return "\n\n".join(diff_sections)
 
 
+def main(configs: CommitStyleConfigs):
+    try:
+        engine = OllamaEngine(config=configs)
+        diff = get_diff()
+        # print(diff)
+        for chunk in engine.stream(diff):
+            print(chunk, end="", flush=True)
+        return 0
+    except Exception as e:
+        print_error_message(str(e))
+        return 1
+
+
 # For testing
 if __name__ == "__main__":
-    engine = OllamaEngine()
-    diff = get_diff()
-    print(diff)
-    for chunk in engine.stream(diff):
-        print(chunk, end="", flush=True)
+    main(configs=CommitStyleConfigs())
