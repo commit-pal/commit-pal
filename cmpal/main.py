@@ -15,7 +15,7 @@ def main():
         return 0
 
     match sys.argv[1]:
-        case "--setup":
+        case "--setup" | "--init":
             return setup()
         case "--help":
             print_available_commands()
