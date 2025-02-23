@@ -6,5 +6,5 @@ Your response should consist only of the commit message as it will be used in th
 GIT_COMMIT_MESSAGE_USER_PROMPT = """Here's the diff to analyze:
 {diff}
 
-You should only output the commit message, nothing else.
+You should only output the commit message, nothing else. No matter how many files are changed, you should always output a single commit message. It should be concise and to the point.
 """
