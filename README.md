@@ -6,7 +6,7 @@ A CLI AI assistant that helps you write commit messages at the speed of light
 
 ### Install and setup commit-pal
 
-Install the latest version of commit-pal from PyPI:
+Install the latest version of `commit-pal` from PyPI:
 
 ```bash
 pip install commit-pal
@@ -23,6 +23,16 @@ cm --setup # Configure the style of the commit messages
   - See [Ollama.com](https://ollama.com/search) for more information on the models available.
 
 By default, Ollama will run on `localhost:11434`.
+
+### Generate commit message
+
+After staging your changes, run the following command to generate a commit message:
+
+```bash
+cm
+```
+
+The proposed commit message will be displayed in the terminal for you to review and confirm
 
 ## Development Setup
 
