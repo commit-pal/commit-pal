@@ -1,6 +1,6 @@
 [project]
 name = "cmpal"
-version = "0.1.2"
+version = "0.1.4"
 description = ""
 authors = [
     {name = "jinyang628",email = "chenjinyang4192@gmail.com"},
@@ -34,7 +34,8 @@ profile = "black"
 include_trailing_comma = true
 
 [tool.poetry.scripts]
-"cmpal" = "cmpal.main:main" 
+"cm" = "cmpal.main:main" 
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
