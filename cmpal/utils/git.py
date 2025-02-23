@@ -126,8 +126,3 @@ def main(configs: CommitStyleConfigs) -> str:
     except Exception as e:
         print_error_message(str(e))
         return ""
-
-
-# For testing
-if __name__ == "__main__":
-    print(main(configs=CommitStyleConfigs()))

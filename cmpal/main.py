@@ -17,12 +17,15 @@ def main():
         if saved_config := load_config():
             configs: CommitStyleConfigs = CommitStyleConfigs.model_validate(saved_config)
             commit_message: str = generate_commit_message(configs=configs)
+            if not commit_message:
+                return
+
             print("\n")
             is_approved: bool = verify_commit_message()
             if is_approved:
                 os.system(f'git commit -m "{commit_message}"')
             else:
-                print("Regenerating commit message...")
+                print("Commit message rejected :(")
             return
 
         return setup()
