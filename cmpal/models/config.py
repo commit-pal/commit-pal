@@ -52,7 +52,7 @@ class CommitStyleConfigs(BaseModel):
         description="Whether the subject line should end with a period.",
     )
     scope_format: ScopeFormat = Field(
-        default=ScopeFormat.PARENTHESES,
+        default=ScopeFormat.NONE,  # TODO: Change to PARENTHESES and update prompt
         description="How the scope should be formatted (e.g., parentheses, brackets, or none).",
     )
     breaking_change_indicator: BreakingChangeIndicator = Field(
