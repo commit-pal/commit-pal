@@ -3,7 +3,8 @@ from typing import List, Optional
 
 from cmpal.inference.llm import OllamaEngine
 from cmpal.models.config import CommitStyleConfigs
-from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff, print_error_message
+from cmpal.utils.format import format_poetry_lock_diff, format_yarn_lock_diff
+from cmpal.utils.terminal import print_error_message
 
 
 def get_staged_files() -> List[str]:

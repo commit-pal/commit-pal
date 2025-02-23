@@ -1,10 +1,12 @@
+import os
 import sys
 
 from cmpal.models.config import CommitStyleConfigs
 from cmpal.scripts.config import load_config
 from cmpal.scripts.onboard import setup
-from cmpal.utils.format import print_available_commands, print_error_message
+from cmpal.scripts.verify import verify_commit_message
 from cmpal.utils.git import main as generate_commit_message
+from cmpal.utils.terminal import print_available_commands, print_error_message
 
 
 def main():
@@ -15,10 +17,14 @@ def main():
         if saved_config := load_config():
             configs: CommitStyleConfigs = CommitStyleConfigs.model_validate(saved_config)
             commit_message: str = generate_commit_message(configs=configs)
-            print(commit_message)
-            
-            
-                
+            print("\n")
+            is_approved: bool = verify_commit_message()
+            if is_approved:
+                os.system(f'git commit -m "{commit_message}"')
+            else:
+                print("Regenerating commit message...")
+            return
+
         return setup()
 
     match sys.argv[1]:

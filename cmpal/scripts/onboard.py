@@ -1,8 +1,3 @@
-import os
-from typing import TypeVar
-
-from simple_term_menu import TerminalMenu
-
 from cmpal.models.config import (
     BreakingChangeIndicator,
     CapitalizationStyle,
@@ -12,8 +7,7 @@ from cmpal.models.config import (
     ScopeFormat,
 )
 from cmpal.scripts.config import save_config
-
-T = TypeVar("T")
+from cmpal.utils.terminal import create_selector
 
 
 def _format_question(question: str, examples: dict[str, str] | None) -> str:
@@ -24,30 +18,9 @@ def _format_question(question: str, examples: dict[str, str] | None) -> str:
     return f"""\033[1;32m{question}\033[0m\n"""
 
 
-def _clear_screen():
-    """Clear the terminal screen."""
-    os.system("cls" if os.name == "nt" else "clear")
-
-
-def _create_selector(options: list[tuple[str, T]], prompt: str, default_index: int = 0) -> T:
-    _clear_screen()
-    print(prompt)
-
-    menu = TerminalMenu(
-        [opt[0] for opt in options],
-        cursor_index=default_index,
-        menu_cursor_style=("fg_purple", "bold"),
-        menu_highlight_style=("bg_purple", "fg_black"),
-        title=None,
-        clear_menu_on_exit=True,
-    )
-    selected_index = menu.show()
-    return options[selected_index][1]
-
-
 def _onboard() -> CommitStyleConfigs:
     print("Welcome to commit-pal! Let's sort out some stylistic preferences.")
-    capitalization = _create_selector(
+    capitalization = create_selector(
         options=[
             ("lowercase (default)", CapitalizationStyle.LOWERCASE),
             ("capitalized", CapitalizationStyle.CAPITALIZED),
@@ -60,7 +33,7 @@ def _onboard() -> CommitStyleConfigs:
             },
         ),
     )
-    punctuation = _create_selector(
+    punctuation = create_selector(
         options=[
             ("without punctuation (default)", PunctuationStyle.WITHOUT_PERIOD),
             ("with punctuation", PunctuationStyle.WITH_PERIOD),
@@ -73,7 +46,7 @@ def _onboard() -> CommitStyleConfigs:
             },
         ),
     )
-    scope_format = _create_selector(
+    scope_format = create_selector(
         options=[
             ("parentheses (default)", ScopeFormat.PARENTHESES),
             ("brackets", ScopeFormat.BRACKETS),
@@ -88,7 +61,7 @@ def _onboard() -> CommitStyleConfigs:
             },
         ),
     )
-    breaking_change_indicator = _create_selector(
+    breaking_change_indicator = create_selector(
         options=[
             ("exclamation mark (default)", BreakingChangeIndicator.EXCLAMATION_MARK),
             ("footer only", BreakingChangeIndicator.FOOTER_ONLY),
@@ -101,7 +74,7 @@ def _onboard() -> CommitStyleConfigs:
             },
         ),
     )
-    footer_format = _create_selector(
+    footer_format = create_selector(
         options=[
             ("KEY: VALUE (default)", FooterFormat.KEY_VALUE_COLON),
             ("KEY=VALUE", FooterFormat.KEY_VALUE_EQUALS),
@@ -114,7 +87,7 @@ def _onboard() -> CommitStyleConfigs:
             },
         ),
     )
-    max_subject_length = _create_selector(
+    max_subject_length = create_selector(
         options=[
             ("72 characters (default)", 72),
             ("50 characters", 50),
