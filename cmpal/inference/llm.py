@@ -1,6 +1,9 @@
 from ollama import Client
 
-from cmpal.inference.prompts import GIT_COMMIT_MESSAGE_SYSTEM_PROMPT, GIT_COMMIT_MESSAGE_USER_PROMPT
+from cmpal.inference.prompts import (
+    GIT_COMMIT_MESSAGE_SYSTEM_PROMPT,
+    GIT_COMMIT_MESSAGE_USER_PROMPT,
+)
 from cmpal.models.config import CommitStyleConfigs
 
 
@@ -9,7 +12,7 @@ class OllamaEngine:
         self,
         config: CommitStyleConfigs,
         host: str = "http://localhost:11434",
-        model: str = "llama3.2",
+        model: str = "qwen2.5-coder:7b",
         headers=None,
     ):
         self._client = Client(host=host, headers=headers or {"x-some-header": "some-value"})

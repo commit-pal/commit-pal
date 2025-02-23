@@ -19,8 +19,9 @@ cm --setup # Configure the style of the commit messages
 ### Run LLM locally with Ollama
 
 - [Ollama](https://ollama.com/download) should be installed and running
-- Pull a model to use with the library: `ollama pull <model>` e.g. `ollama pull llama3.2`
+- Pull and run a model to use with the library: `ollama run <model>` e.g. `ollama run qwen2.5-coder:7b`
   - See [Ollama.com](https://ollama.com/search) for more information on the models available.
+  - We have seen the best performance with [qwen2.5-coder:7b](https://ollama.com/library/qwen2.5-coder:7b) model so far.
 
 By default, Ollama will run on `localhost:11434`.
 
