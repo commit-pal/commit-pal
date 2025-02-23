@@ -113,19 +113,20 @@ def _process_multiple_diffs(diff_content: str) -> str:
     return "\n\n".join(diff_sections)
 
 
-def main(configs: CommitStyleConfigs):
+def main(configs: CommitStyleConfigs) -> str:
     try:
         engine = OllamaEngine(config=configs)
         diff = get_diff()
-        # print(diff)
+        commit_message: str = ""
         for chunk in engine.stream(diff):
             print(chunk, end="", flush=True)
-        return 0
+            commit_message += chunk
+        return commit_message
     except Exception as e:
         print_error_message(str(e))
-        return 1
+        return ""
 
 
 # For testing
 if __name__ == "__main__":
-    main(configs=CommitStyleConfigs())
+    print(main(configs=CommitStyleConfigs()))

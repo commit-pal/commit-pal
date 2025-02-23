@@ -34,7 +34,7 @@ cm
 
 The proposed commit message will be displayed in the terminal for you to review and confirm
 
-## Development Setup
+## Development Setup (Only for developers who wish to contribute to the project)
 
 ### Install Poetry
 

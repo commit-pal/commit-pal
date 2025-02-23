@@ -14,7 +14,11 @@ def main():
     elif len(sys.argv) == 1:
         if saved_config := load_config():
             configs: CommitStyleConfigs = CommitStyleConfigs.model_validate(saved_config)
-            return generate_commit_message(configs=configs)
+            commit_message: str = generate_commit_message(configs=configs)
+            print(commit_message)
+            
+            
+                
         return setup()
 
     match sys.argv[1]:
