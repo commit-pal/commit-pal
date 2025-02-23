@@ -1,6 +1,6 @@
-# commit-pal
+# commit-pal ⚡️
 
-A CLI AI assistant that helps you write commit messages at the speed of light
+A CLI AI assistant that helps you write commit messages at the speed of light using locally run LLMs.
 
 ## Quick Start
 
