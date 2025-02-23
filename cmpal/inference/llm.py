@@ -1,9 +1,6 @@
 from ollama import Client
 
-from cmpal.inference.prompts import (
-    GIT_COMMIT_MESSAGE_SYSTEM_PROMPT,
-    GIT_COMMIT_MESSAGE_USER_PROMPT,
-)
+from cmpal.inference.prompts import GIT_COMMIT_MESSAGE_SYSTEM_PROMPT, GIT_COMMIT_MESSAGE_USER_PROMPT
 from cmpal.models.config import CommitStyleConfigs
 
 
