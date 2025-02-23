@@ -17,9 +17,12 @@ def print_error_message(error_message: str):
 
 
 def print_available_commands():
+    print("\n")
     print(f"{Fore.GREEN}Available commands:{Style.RESET_ALL}")
     print(f"{Fore.CYAN}------------------------------------{Style.RESET_ALL}")
-    print("- cmpal --setup: Set up the project with the required configurations")
+    print("- cm --setup: Set up the project with the required configurations")
+    print(f"{Fore.CYAN}------------------------------------{Style.RESET_ALL}")
+    print("- cm: Generate a commit message based on the staged files")
     print(f"{Fore.CYAN}------------------------------------{Style.RESET_ALL}")
 
 
