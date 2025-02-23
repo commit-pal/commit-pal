@@ -1,7 +1,6 @@
 import re
 
 
-
 def format_poetry_lock_diff(content: str) -> str:
     # Find all package blocks including additions, removals, and changes
     package_pattern = r"(?:^|\n)((?:[-+ ])\[\[package\]\].*?\n(?:[-+ ].*?\n)+)"
