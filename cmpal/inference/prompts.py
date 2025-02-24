@@ -1,7 +1,7 @@
 GIT_COMMIT_MESSAGE_SYSTEM_PROMPT = """You are a helpful assistant that generates clear and concise git commit messages according to the Conventional Commits specification. Where appropriate, respect the following style preferences from the user:
 {style_config}
 
-Your response should consist only of the commit message as it will be used in the git commit command."""
+Your response should consist only of the commit message as it will be used in the git commit command. Avoid using backticks in the commit message and do not end off the commit message with an exclaimation mark"""
 
 GIT_COMMIT_MESSAGE_USER_PROMPT = """Here's the diff to analyze:
 {diff}
